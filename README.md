@@ -12,10 +12,10 @@ Converting to full COGs is far better than creating regular GeoTiffs. The key be
 
 ## Quick run
 The tool(s) can be run on:
-* [command line with Docker](##running-on-the-command-line-with-docker)
-* [command line with Nextflow](##running-on-the-command-line-with-nextflow)
-* [Deploit with Docker](##running-docker-on-deploit)
-* [Deploit with Nextflow](##running-nextflow-on-deploit)
+* [command line with Docker](#running-on-the-command-line-with-docker)
+* [command line with Nextflow](#running-on-the-command-line-with-nextflow)
+* [Deploit with Docker](#running-docker-on-deploit)
+* [Deploit with Nextflow](#running-nextflow-on-deploit)
 
 If analysing lots of data it is recommended to use Nextflow rather than Docker alone for increased parallelisation. 
 
