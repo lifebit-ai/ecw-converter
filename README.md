@@ -16,7 +16,7 @@ The tool(s) can be run either through the [command line](#running-on-the-command
 ## Testdata
 Bucket containing the images (300 zips of the .ecw format files) can be found at: [s3://lifebit-public](https://s3-eu-west-1.amazonaws.com/lifebit-public/)
 
-![aws_data](https://raw.githubusercontent.com/lifebit-ai/ecw_converter/master/images/aws_data.png)
+![aws_data](https://raw.githubusercontent.com/lifebit-ai/ecw-converter/master/images/aws_data.png)
 
 
 ## Docker
@@ -59,20 +59,20 @@ Deploit is a bioinformatics platform, developed by Lifebit, where you can run yo
 
 You can create an account/log in [here](https://deploit.lifebit.ai/login)
 
-![deploit](https://raw.githubusercontent.com/lifebit-ai/ecw_converter/master/images/deploit.png)
+![deploit](https://raw.githubusercontent.com/lifebit-ai/ecw-converter/master/images/deploit.png)
 
 ### Import the Docker image from DockerHub:
 
 Navigate to the pipelines page, click new to import a new pipeline. Then select Docker & paste the URL from DockerHub eg: https://hub.docker.com/r/lifebitai/ecw_converter
 
-![import](https://raw.githubusercontent.com/lifebit-ai/ecw_converter/master/images/import_docker.png)
+![import](https://raw.githubusercontent.com/lifebit-ai/ecw-converter/master/images/import_docker.png)
 
 
 ### Running a job
 
 You can then click the pipeline under the "My pipelines" section and select data/input parameters:
 
-![run_job](https://raw.githubusercontent.com/lifebit-ai/ecw_converter/master/images/run_job.png)
+![run_job](https://raw.githubusercontent.com/lifebit-ai/ecw-converter/master/images/run_job.png)
 
 No input parameters are required. Currently, all of the input zipped ecw files are set using the working directory. All of the files in the working directory will then be unzipped and the ecw files converted.
 
@@ -80,7 +80,7 @@ No input parameters are required. Currently, all of the input zipped ecw files a
 
 Select a project & instance:
 
-![instance](https://raw.githubusercontent.com/lifebit-ai/ecw_converter/master/images/instance.png)
+![instance](https://raw.githubusercontent.com/lifebit-ai/ecw-converter/master/images/instance.png)
 
 As the bucket contains 2056GB the cost to convert all of the files may be around $822.40 (0.40 x 2056).
 
