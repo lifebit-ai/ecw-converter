@@ -1,6 +1,6 @@
 # ecw-converter
 
-Dockerised scripts for converting ecw files to either geotiffs or Cloud Optimised Geotiffs (COGs).
+Dockerised python scripts & Nextflow pipeline for converting ecw files to either geotiffs or Cloud Optimised Geotiffs (COGs).
 
 ## Motivation
 
@@ -11,7 +11,13 @@ Converting to full COGs is far better than creating regular GeoTiffs. The key be
 
 
 ## Quick run
-The tool(s) can be run either through the [command line](#running-on-the-command-line) or run on the cloud through a GUI on [Deploit](#running-on-deploit)
+The tool(s) can be run on:
+* [command line with Docker](##running-on-the-command-line-with-docker)
+* [command line with Nextflow](##running-on-the-command-line-with-nextflow)
+* [Deploit with Docker](##running-docker-on-deploit)
+* [Deploit with Nextflow](##running-nextflow-on-deploit)
+
+If analysing lots of data it is recommended to use Nextflow rather than Docker alone for increased parallelisation. 
 
 ## Testdata
 Bucket containing the images (300 zips of the .ecw format files) can be found at: [s3://lifebit-public](https://s3-eu-west-1.amazonaws.com/lifebit-public/)
@@ -45,7 +51,7 @@ docker build -t <DockerHubUsername>/ecw_converter:<tag> .
 # you can then use `docker login` & `docker push <DockerHubUsername>/ecw_converter:<tag>` to push to DockerHub
 ```
 
-## Running on the command line
+### Running on the command line with Docker
 
 If you have docker installed, and zipped ECW files in you current directory the tool can be run with the following command:
 ```bash
@@ -53,7 +59,7 @@ If you have docker installed, and zipped ECW files in you current directory the 
 docker run -v $PWD:$PWD -w $PWD lifebitai/ecw_converter ecw_to_cog.sh
 ```
 
-## Running on Deploit
+## Deploit
 
 Deploit is a bioinformatics platform, developed by Lifebit, where you can run your analysis over the Cloud/AWS.
 
@@ -61,14 +67,16 @@ You can create an account/log in [here](https://deploit.lifebit.ai/login)
 
 ![deploit](https://raw.githubusercontent.com/lifebit-ai/ecw-converter/master/images/deploit.png)
 
-### Import the Docker image from DockerHub:
+### Running Docker on Deploit
+
+#### Import the Docker image from DockerHub:
 
 Navigate to the pipelines page, click new to import a new pipeline. Then select Docker & paste the URL from DockerHub eg: https://hub.docker.com/r/lifebitai/ecw_converter
 
 ![import](https://raw.githubusercontent.com/lifebit-ai/ecw-converter/master/images/import_docker.png)
 
 
-### Running a job
+#### Running a job
 
 You can then click the pipeline under the "My pipelines" section and select data/input parameters:
 
@@ -76,13 +84,45 @@ You can then click the pipeline under the "My pipelines" section and select data
 
 No input parameters are required. Currently, all of the input zipped ecw files are set using the working directory. All of the files in the working directory will then be unzipped and the ecw files converted.
 
-### Setting resources
+#### Setting resources
 
 Select a project & instance:
 
 ![instance](https://raw.githubusercontent.com/lifebit-ai/ecw-converter/master/images/instance.png)
 
-As the bucket contains 2056GB the cost to convert all of the files may be around $822.40 (0.40 x 2056).
+## Nextflow
+
+### Running on the command line with Nextflow
+
+If you have Nextflow & Docker installed, and zipped ECW files in one of your directories the pipeline can be run with the following command:
+```bash
+# you can download a zipped ecw file with `wget https://s3-eu-west-1.amazonaws.com/lifebit-public/10km_2017_612_62_ECW_UTM32-ETRS89.zip`
+nextflow run main.nf --input_folder <your_folder>
+```
+
+### Running Nextflow on Deploit
+
+#### Import the Nextflow pipeline from GitHib:
+
+Navigate to the pipelines page, click new to import a new pipeline. Then select Nextflow & paste the URL from GitHub eg: https://github.com/lifebit-ai/ecw-converter
+
+![import_nextflow](https://raw.githubusercontent.com/lifebit-ai/ecw-converter/master/images/import_nextflow.png)
+
+
+#### Running a Nextflow job
+
+You can then click the pipeline under the "My pipelines" section and select data/input parameters:
+
+The `--input_folder` is a required parameter. It must contain all of the input zipped ecw files to be unzipped and the ecw files converted. The data can be set by clicking the blue arrow and selecting your data either from an S3 bucket or by uploading the data. 
+
+
+![run_nextflow_job](https://raw.githubusercontent.com/lifebit-ai/ecw-converter/master/images/run_nextflow_job.png)
+
+#### Setting resources
+
+Select a project & instance:
+
+![instance_nextflow](https://raw.githubusercontent.com/lifebit-ai/ecw-converter/master/images/instance_nextflow.png)
 
 ## Outputs
 
