@@ -7,14 +7,14 @@ Channel
 
 process ecw_converter {
     tag "$zip"
-    publishDir 'results'
+    publishDir 'results', mode: 'copy'
     container 'lifebitai/ecw_converter:latest'
 
     input:
     file zip from input_folder
 
     output:
-    file('*') into results
+    set file("**.ecw"), file("**.tif") into results
 
     script:
     """
