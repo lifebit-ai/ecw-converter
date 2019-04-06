@@ -2,6 +2,26 @@
 
 Dockerised python scripts & Nextflow pipeline for converting ecw files to either geotiffs or Cloud Optimised Geotiffs (COGs).
 
+- [Motivation](https://github.com/lifebit-ai/ecw-converter#motivation)
+- [Quick Run](https://github.com/lifebit-ai/ecw-converter#quick-run)
+- [Testdata](https://github.com/lifebit-ai/ecw-converter#testdata)
+- [Docker](https://github.com/lifebit-ai/ecw-converter#docker)
+    - [Rebuilding the docker image](https://github.com/lifebit-ai/ecw-converter#rebuilding-the-docker-image) 
+    - [Running on the command line with Docker](https://github.com/lifebit-ai/ecw-converter#running-on-the-command-line-with-docker)
+- [Deploit](https://github.com/lifebit-ai/ecw-converter#deploit)
+    - [Running docker on Deploit](https://github.com/lifebit-ai/ecw-converter#running-docker-on-deploit) 
+        - [Import the docker image from DockerHub](https://github.com/lifebit-ai/ecw-converter#import-the-docker-image-from-dockerhub)
+        - [Running a job](https://github.com/lifebit-ai/ecw-converter#running-a-job)
+        - [Setting resources](https://github.com/lifebit-ai/ecw-converter#setting-resources)
+- [Nextflow](https://github.com/lifebit-ai/ecw-converter#nextflow)
+    - [Running on the command line](https://github.com/lifebit-ai/ecw-converter#running-on-the-command-line-with-nextflow)
+    - [Running Nextflow on Deploit](https://github.com/lifebit-ai/ecw-converter#running-nextflow-on-deploit)
+        - [Import the Nextflow pipeline from GitHub](https://github.com/lifebit-ai/ecw-converter#import-the-nextflow-pipeline-from-githib)
+        - [Running a Nextflow job](https://github.com/lifebit-ai/ecw-converter#running-a-nextflow-job)\
+        - [Setting resources](https://github.com/lifebit-ai/ecw-converter#setting-resources-1)
+- [Cost estimate](https://github.com/lifebit-ai/ecw-converter#cost-estimate)
+- [Outputs](https://github.com/lifebit-ai/ecw-converter#outputs)
+
 ## Motivation
 
 The scripts have been used for converting a stream ecw file images from [Denmark aerial imagery source site](https://download.kortforsyningen.dk/content/geodanmark-ortofoto-blokinddelt) into coggs (which is a very high compute process).
@@ -125,7 +145,7 @@ Select a project & instance:
 ![instance_nextflow](https://raw.githubusercontent.com/lifebit-ai/ecw-converter/master/images/instance_nextflow.png)
 
 ## Cost estimate
-Resources used for 4 zipped ecw files a total 4.35GB (see the job [here](https://deploit.lifebit.ai/public/jobs/5ca8cf0fe4365600b2b15a2e))
+Resources used for a total 4.35GB zipped ecw files (see the job [here](https://deploit.lifebit.ai/public/jobs/5ca8cf0fe4365600b2b15a2e))
 * Resources: an m2.2xlarge (spot) instance was used. (This has 4 CPUs & 34.2 GB memory)
 * Run time: 2h 46m
 * Cost: $0.43
