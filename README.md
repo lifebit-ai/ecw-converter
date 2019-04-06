@@ -124,6 +124,16 @@ Select a project & instance:
 
 ![instance_nextflow](https://raw.githubusercontent.com/lifebit-ai/ecw-converter/master/images/instance_nextflow.png)
 
+## Cost estimate
+Resources used for 4 zipped ecw files a total 4.35GB (see the job [here](https://deploit.lifebit.ai/public/jobs/5ca8cf0fe4365600b2b15a2e))
+* Resources: an m2.2xlarge (spot) instance was used. (This has 4 CPUs & 34.2 GB memory)
+* Run time: 2h 46m
+* Cost: $0.43
+
+As the bucket contains 2056GB the cost to convert all of the files (assuming the cost scales linearly) may be around $200 (0.426 / 4.35 x 2056)
+
+![job_monitor](https://raw.githubusercontent.com/lifebit-ai/ecw-converter/master/images/job_monitor.png)
+
 ## Outputs
 
 From running the `ecw_to_cog.sh` script the following folders/files are generated:
@@ -136,3 +146,5 @@ From running the `ecw_to_cog.sh` script the following folders/files are generate
 * `img`
     * `compliant-cog` directory to contain COG files
 * `ecw` directory to store the .ecw files once unzipped
+
+When running the Nextflow pipeline only the `tif` & `img` directories are outputted to save storage space
