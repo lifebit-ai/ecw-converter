@@ -17,7 +17,7 @@ Dockerised python scripts & Nextflow pipeline for converting ecw files to either
     - [Running on the command line](https://github.com/lifebit-ai/ecw-converter#running-on-the-command-line-with-nextflow)
     - [Running Nextflow on Deploit](https://github.com/lifebit-ai/ecw-converter#running-nextflow-on-deploit)
         - [Import the Nextflow pipeline from GitHub](https://github.com/lifebit-ai/ecw-converter#import-the-nextflow-pipeline-from-githib)
-        - [Running a Nextflow job](https://github.com/lifebit-ai/ecw-converter#running-a-nextflow-job)\
+        - [Running a Nextflow job](https://github.com/lifebit-ai/ecw-converter#running-a-nextflow-job)
         - [Setting resources](https://github.com/lifebit-ai/ecw-converter#setting-resources-1)
 - [Cost estimate](https://github.com/lifebit-ai/ecw-converter#cost-estimate)
 - [Outputs](https://github.com/lifebit-ai/ecw-converter#outputs)
@@ -145,7 +145,7 @@ Select a project & instance:
 ![instance_nextflow](https://raw.githubusercontent.com/lifebit-ai/ecw-converter/master/images/instance_nextflow.png)
 
 ## Cost estimate
-Resources used for a total 4.35GB zipped ecw files (see the job [here](https://deploit.lifebit.ai/public/jobs/5ca8cf0fe4365600b2b15a2e))
+Resources used for four zipped ecw files, 4.35GB in total (see the job [here](https://deploit.lifebit.ai/public/jobs/5ca8cf0fe4365600b2b15a2e))
 * Resources: an m2.2xlarge (spot) instance was used. (This has 4 CPUs & 34.2 GB memory)
 * Run time: 2h 46m
 * Cost: $0.43
