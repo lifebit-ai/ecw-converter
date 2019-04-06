@@ -14,7 +14,7 @@ process ecw_converter {
     file zip from input_folder
 
     output:
-    set file("**.ecw"), file("**.tif") into results
+    file("**.tif") into results
 
     script:
     """
