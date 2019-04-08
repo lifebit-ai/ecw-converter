@@ -1,6 +1,6 @@
 # ecw-converter
 
-Dockerised python scripts & Nextflow pipeline for converting ecw files to either geotiffs or Cloud Optimised Geotiffs (COGs).
+Dockerised python scripts & Nextflow pipeline for converting ecw files to either Geotiffs or Cloud Optimised Geotiffs (COGs).
 
 - [Motivation](https://github.com/lifebit-ai/ecw-converter#motivation)
 - [Quick Run](https://github.com/lifebit-ai/ecw-converter#quick-run)
@@ -24,9 +24,9 @@ Dockerised python scripts & Nextflow pipeline for converting ecw files to either
 
 ## Motivation
 
-The scripts have been used for converting a stream ecw file images from [Denmark aerial imagery source site](https://download.kortforsyningen.dk/content/geodanmark-ortofoto-blokinddelt) into coggs (which is a very high compute process).
+The scripts have been used for converting a stream ecw file images from [Denmark aerial imagery source site](https://download.kortforsyningen.dk/content/geodanmark-ortofoto-blokinddelt) into COGs (which is a very high compute process).
 
-Converting to full COGs is far better than creating regular GeoTiffs. The key benefit of a COG is that it is possible to get only a section of the image if required, rather than downloading the entire file. When working with large files and doing analysis on/viewing a specific section of the image, this becomes incredibly beneficial.
+Converting to full COGs is far better than creating regular Geotiffs. The key benefit of a COG is that it is possible to get only a section of the image if required, rather than downloading the entire file. When working with large files and doing analysis on/viewing a specific section of the image, this becomes incredibly beneficial.
 (There are also further differences)
 
 
@@ -52,14 +52,14 @@ The docker image contains the scripts which were originally downloaded from [joe
 
 The modifications included:
 - changing the regex for input ECW files
-- removing the pushing to S3 bucket
+- removing the pushing to an S3 bucket as this is handled by Deploit
 - adding python shebang lines
 
 Dependencies for the scripts such as GDAL with .ecw drivers & Python are also installed in the image.
 
 The docker image includes the following scripts:
 - [`ecw_to_cog.sh`](ecw_converter/ecw_to_cog.sh) bash wrapper script to unzip files the input files and then run the scripts below
-- [`ecw_convert_2_cog.py`](ecw_converter/ecw_convert_2_cog.py) scripts for converting .ecw files to both COGs and GeoTiffs. There are two gdal_translate processes. Without the second process, you will NOT create a valid COG
+- [`ecw_convert_2_cog.py`](ecw_converter/ecw_convert_2_cog.py) scripts for converting .ecw files to both COGs and Geotiffs. There are two gdal_translate processes. Without the second process, you will NOT create a valid COG
 - [`validate_cog.py`](ecw_converter/validate_cog.py) validate whether a COG is a valid, fully compliant COG
 
 ### (Re)building the Docker image
@@ -70,6 +70,8 @@ git clone https://github.com/lifebit-ai/ecw-converter.git && cd ecw-converter
 docker build -t <DockerHubUsername>/ecw_converter:<tag> .
 # you can then use `docker login` & `docker push <DockerHubUsername>/ecw_converter:<tag>` to push to DockerHub
 ```
+
+Once the docker image has been built & pushed to the DockerHub registry. (Which has already been done under the lifebitai DockerHub account). Any user can easily run the docker image either on the command line or on Deploit (see more details below)
 
 ### Running on the command line with Docker
 
@@ -112,6 +114,8 @@ Select a project & instance:
 
 ## Nextflow
 
+Nextflow is a programming language used to build data pipelines that has been widely adopted by the bioinformatics community. It was used here because of it's in-built support for Docker containers and parallelisation that allows the conversion of each of the ECW files to take place simultaneously.
+
 ### Running on the command line with Nextflow
 
 If you have Nextflow & Docker installed, and zipped ECW files in one of your directories the pipeline can be run with the following command:
@@ -152,6 +156,8 @@ Resources used for four zipped ecw files, 4.35GB in total (see the job [here](ht
 
 As the bucket contains 2056GB the cost to convert all of the files (assuming the cost scales linearly) may be around $200 (0.426 / 4.35 x 2056)
 
+As the file conversion can be run in parrallel for each of the files (by using the Nextflow pipeline) the total time taken should be equal to that of the time taken to convert the largest file. 
+
 ![job_monitor](https://raw.githubusercontent.com/lifebit-ai/ecw-converter/master/images/job_monitor.png)
 
 ## Outputs
@@ -167,4 +173,6 @@ From running the `ecw_to_cog.sh` script the following folders/files are generate
     * `compliant-cog` directory to contain COG files
 * `ecw` directory to store the .ecw files once unzipped
 
-When running the Nextflow pipeline only the `tif` & `img` directories are outputted to save storage space
+When running the Nextflow pipeline only the `tif` & `img` directories are outputted to save storage space.
+
+When run over Deploit results are made in the users S3 bucket generated by Deploit. This will be located in `s3://lifebit-user-data-<id>/results/job-<id>/results/` as shown by Deploit
