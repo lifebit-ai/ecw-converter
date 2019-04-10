@@ -13,7 +13,7 @@ process unzip {
     file zip from input_folder
 
     output:
-    file("**.ecw") into ecw
+    file("*.ecw") into ecw
 
     script:
     """
