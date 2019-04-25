@@ -40,7 +40,7 @@ The tool(s) can be run on:
 If analysing lots of data it is recommended to use Nextflow rather than Docker alone for increased parallelisation. 
 
 ## Testdata
-Bucket containing the images (300 zips of the .ecw format files) can be found at: [s3://lifebit-public](https://s3-eu-west-1.amazonaws.com/lifebit-public/)
+Bucket containing the images (300 zips of the .ecw format files) can be found at: [s3://lifebit-public](https://s3.console.aws.amazon.com/s3/buckets/lifebit-public/?region=eu-west-1&tab=overview#)
 
 ![aws_data](https://raw.githubusercontent.com/lifebit-ai/ecw-converter/master/images/aws_data.png)
 
